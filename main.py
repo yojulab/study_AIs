@@ -22,11 +22,11 @@ import pickle
 # /api_v1/mlmodelwithregression with dict params
 # method : post
 @app.post('/api_v1/mlmodelwithregression') 
-def mlmodelwithregression(data:dict) : 
+def mlmodelwithregression(data:dict) : # json
     print('data with dict {}'.format(data))
     # data dict to 변수 활당
-    texture_mean = data['texture_mean']
-    perimeter_mean = data['perimeter_mean']
+    texture_mean = float(data['texture_mean'])
+    perimeter_mean = float(data['perimeter_mean'])
 
     # pkl 파일 존재 확인 코드 필요
 
