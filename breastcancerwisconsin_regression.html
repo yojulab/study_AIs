@@ -28,7 +28,7 @@
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">Predict</button>
+            <button type="submit" class="btn btn-primary" id="predict">Predict</button>
         </form>
 
         <!-- Result Display -->
@@ -36,5 +36,35 @@
 
     </div>
 </body>
+<script>
+    // id : #, class :. , tag : 그대로 사용
+ let predictObject = document.querySelector('#predict')
+ predictObject.addEventListener('click', (event)=>{
+    event.preventDefault();  // submit 정지
+    let texture_mean = document.querySelector('#textureMeanInput').value;
+    let perimeter_mean = document.querySelector('#perimeterMeanInput').value;
+
+    let request_dict = {"texture_mean":texture_mean
+                    , "perimeter_mean":perimeter_mean};
+
+    // console.log(`request_dict : ${request_dict}`);
+    // request backend and then return dict
+    fetch('http://127.0.0.1:8000/api_v1/mlmodelwithregression', {
+     method: 'POST',
+     headers: {
+       'Content-Type': 'application/json'
+     },
+     body: JSON.stringify(request_dict)
+   })
+   .then(response => response.json())
+   .then(data => {
+     console.log(data)
+     // Display the result in the resultDisplay div
+     document.querySelector('#resultDisplay').innerHTML = `Radius Mean : ${data.radius_mean}`;
+   })
+   .catch(error => console.error(error));
+
+ });
+</script>
 
 </html>
