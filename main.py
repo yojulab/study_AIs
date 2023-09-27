@@ -25,6 +25,10 @@ import pickle
 
 # /api_v1/mlmodelwithregression with dict params
 # method : post
+# {
+#     "texture_mean": 18.5,
+#     "perimeter_mean": 102.1
+# }
 @app.post('/api_v1/mlmodelwithregression') 
 def mlmodelwithregression(data:dict) : # json
     print('data with dict {}'.format(data))
