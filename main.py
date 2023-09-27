@@ -13,6 +13,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Mount the 'resources' directory as '/images' endpoint
+from fastapi.staticfiles import StaticFiles
+app.mount("/images", StaticFiles(directory="resources"), name="images") 
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
