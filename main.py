@@ -16,6 +16,9 @@ app.add_middleware(
 # Mount the 'resources' directory as '/images' endpoint
 from fastapi.staticfiles import StaticFiles
 app.mount("/images", StaticFiles(directory="resources"), name="images") 
+# EX) http://127.0.0.1:8000/images/thermometer.png
+# <img src='http://127.0.0.1:8000/images/thermometer.png' /> # view
+# <a href='http://127.0.0.1:8000/images/thermometer.png'> thermometer.png</a> # download
 
 @app.get("/")
 async def root():
